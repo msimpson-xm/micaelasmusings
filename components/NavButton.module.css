@@ -1,0 +1,14 @@
+.navbarItem {
+  display: inline-block;
+}
+
+.navbarItem * {
+  margin: 1rem;
+  background-color: white;
+  border: none;
+  text-align: center;
+  text-decoration: none;
+  cursor: pointer;
+  font-size: medium;
+  color: #999;
+}

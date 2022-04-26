@@ -1,12 +1,9 @@
 import type { NextPage } from 'next'
 import Head from 'next/head'
-import Image from 'next/image'
-import Footer from '../components/Footer'
-import Layout from '../components/Layout'
 import Navbar from '../components/Navbar'
 import styles from '../styles/Home.module.css'
 
-const Home: NextPage = () => {
+const About: NextPage = () => {
   return (
     <div className={styles.container}>
       <Head>
@@ -15,10 +12,9 @@ const Home: NextPage = () => {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <Navbar />
-      <Layout />
-      <Footer />
+      <div className={styles.aboutInfo}>Home Page</div>
     </div>
   )
 }
 
-export default Home
+export default About
