@@ -10,5 +10,9 @@
   text-decoration: none;
   cursor: pointer;
   font-size: medium;
-  color: #999;
+  color: #cdc2bd;
+}
+
+.navBarItemHover:hover {
+  color: #c89b88;
 }

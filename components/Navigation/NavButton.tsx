@@ -9,8 +9,8 @@ type props = {
 const NavButton = ({ label }: props) => {
   return (
     <div className={styles.navbarItem}>
-      <Link href={`/${encodeURIComponent(label)}`}>
-        <a>{label}</a>
+      <Link href={label === 'Home' ? '/' : `/${encodeURIComponent(label)}`}>
+        <a className={styles.navBarItemHover}>{label}</a>
       </Link>
     </div>
   );

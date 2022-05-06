@@ -1,0 +1,20 @@
+.navigationItems {
+  display: block;
+  padding-top: 2rem;
+  text-align: center;
+}
+
+.headerContainer {
+  position: relative;
+  text-align: center;
+  color: white;
+}
+
+.overlayText {
+  position: absolute;
+  top: 50%;
+  left: 15%;
+  transform: translate(-50%, -50%);
+  font-family: 'Times New Roman', Times, serif;
+  font-size: xx-large;
+}
