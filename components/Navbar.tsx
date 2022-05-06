@@ -2,7 +2,7 @@ import React from 'react'
 import styles from './Navbar.module.css'
 import Image from 'next/image'
 import logo from './logo.png'
-import NavButton from './navButton'
+import NavButton from './NavButton'
 
 const Navbar = () => {
   return (
