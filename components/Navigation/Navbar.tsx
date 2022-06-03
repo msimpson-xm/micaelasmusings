@@ -15,11 +15,11 @@ const Navbar = () => {
       </div>
       
       <div className={styles.navigationItems}>
-        <NavButton label="Home" />
-        <NavButton label="About" />
-        <NavButton label="membering Mari" />
-        <NavButton label="Anxious to Adventurous" />
-        <NavButton label="My Walking Shoes" />
+        <NavButton label="Home" componentLocation="" />
+        <NavButton label="About" componentLocation="About" />
+        <NavButton label="membering Mari" componentLocation="MemberingMari" />
+        <NavButton label="Anxious to Adventurous" componentLocation="AnxiousToAdventurous" />
+        <NavButton label="My Walking Shoes" componentLocation="MyWalkingShoes" />
       </div>
     </div>
   )

@@ -14,6 +14,7 @@ const Home: NextPage = () => {
       </Head>
       <Navbar />
       <div className='container'>
+        HERE IS SOME CONTENT 
         <div className={styles.homePage}>
           <LatestFrom blog='memberingMari' />
           <LatestFrom blog='anxiousToAdventurous' />
