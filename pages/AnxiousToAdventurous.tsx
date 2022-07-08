@@ -1,11 +1,67 @@
-import type { NextPage } from 'next'
 import Head from 'next/head'
 import Navbar from '../components/Navigation/Navbar'
+import DisplayPost from '../components/DisplayPost'
 import styles from '../styles/BlogPage.module.css'
-import { getAnxiousToAdventurousPosts } from './api'
 
-const AnxiousToAdventurous: NextPage = () => {
-  const posts = getAnxiousToAdventurousPosts();
+export async function getServerSideProps() {
+  const response = await fetch('https://public-api.wordpress.com/rest/v1.1/sites/micaelasmusingsca.wordpress.com/posts/?category=Anxious%20to%20Adventurous');
+  const data = await response.json();
+  return {
+    props: { 
+      posts: data.posts,
+    }
+  }
+}
+
+interface post {
+  ID: number;
+  URL: string;
+  attachment_count: number;
+  attachments: object;
+  author: object;
+  capabilities: object;
+  categories: object;
+  content: string;
+  date: string;
+  discussion: object;
+  excerpt: string;
+  featured_image: string;
+  format: string;
+  geo: boolean;
+  global_ID: string;
+  guid: string;
+  i_like: boolean;
+  is_following: boolean;
+  is_reblogged: boolean;
+  like_count: number;
+  likes_enabled: boolean
+  menu_order: number;
+  meta: object;
+  metadata: Array<object>;
+  modified: string;
+  other_URLs: object;
+  page_template: string;
+  parent: boolean;
+  password: string;
+  post_thumbnail: object;
+  publicize_URLs: Array<string>;
+  sharing_enabled: boolean;
+  short_URL: string;
+  site_ID: number;
+  slug: string;
+  status: string;
+  sticky: boolean;
+  tags: object;
+  terms: object;
+  title: string;
+  type: string;
+}
+
+type props = {
+  posts: Array<post>
+};
+
+const AnxiousToAdventurous = (props: props) => {
   return (
     <div>
       <Head>
@@ -21,7 +77,9 @@ const AnxiousToAdventurous: NextPage = () => {
           <p>Scotia came to me September 28, 2019. She is a 17lb party-mixed breed. She has a natural mohawk down her spine and her ears occasionally make her look like yoda. She is a silent pup with all the spunk you can imagine.</p>
           <p>What you will find in the posts below is our journey: training, learning, setbacks, trying new things, and my take on how a dog/owner relationship should be. I don’t know tons, so what I share is simply my side. I try to post on the 14th and 28th of each month. I hope you join us on this beautiful journey we are on.</p>
         </div>
-        {posts}
+        {props.posts.map((post) => (
+          <DisplayPost key={post.ID} title={post.title} blurb={post.excerpt} slug={post.slug} />
+        ))}
       </div>
     </div>
   )

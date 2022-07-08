@@ -74,6 +74,7 @@ export { LatestFromPost }
 const LatestFrom = ({ blog }:latestFromProps) => {
   const latestPosts: Array<post> | null = getLatestPosts(blog);
   console.log('12345');
+  console.log(latestPosts);
   if (!latestPosts) {
     return null;
   }

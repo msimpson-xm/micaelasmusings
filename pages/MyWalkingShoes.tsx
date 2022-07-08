@@ -1,11 +1,67 @@
-import type { NextPage } from 'next'
 import Head from 'next/head'
 import Navbar from '../components/Navigation/Navbar'
+import DisplayPost from '../components/DisplayPost'
 import styles from '../styles/BlogPage.module.css'
-import { getMyWalkingShoesPosts } from './api'
 
-const MyWalkingShoes: NextPage = () => {
-  const posts = getMyWalkingShoesPosts();
+export async function getServerSideProps() {
+  const response = await fetch('https://public-api.wordpress.com/rest/v1.1/sites/micaelasmusingsca.wordpress.com/posts/?category=My%20Walking%20Shoes');
+  const data = await response.json();
+  return {
+    props: { 
+      posts: data.posts,
+    }
+  }
+}
+
+interface post {
+  ID: number;
+  URL: string;
+  attachment_count: number;
+  attachments: object;
+  author: object;
+  capabilities: object;
+  categories: object;
+  content: string;
+  date: string;
+  discussion: object;
+  excerpt: string;
+  featured_image: string;
+  format: string;
+  geo: boolean;
+  global_ID: string;
+  guid: string;
+  i_like: boolean;
+  is_following: boolean;
+  is_reblogged: boolean;
+  like_count: number;
+  likes_enabled: boolean
+  menu_order: number;
+  meta: object;
+  metadata: Array<object>;
+  modified: string;
+  other_URLs: object;
+  page_template: string;
+  parent: boolean;
+  password: string;
+  post_thumbnail: object;
+  publicize_URLs: Array<string>;
+  sharing_enabled: boolean;
+  short_URL: string;
+  site_ID: number;
+  slug: string;
+  status: string;
+  sticky: boolean;
+  tags: object;
+  terms: object;
+  title: string;
+  type: string;
+}
+
+type props = {
+  posts: Array<post>
+};
+
+const MyWalkingShoes = (props: props) => {
   return (
     <div>
       <Head>
@@ -18,7 +74,9 @@ const MyWalkingShoes: NextPage = () => {
         <div className={styles.preambleText}>
           <p>Welcome to the newest addition to my blog! Playing off the saying “walk a mile in their shoes”, My Walking Shoes is where I will be giving you insight into what it might be like to walk a mile in my shoes. Here I delve into the nitty gritty of my thoughts and adventures. I will open up about my opinions and my plans to spend a lot of time outside. I hope you stay a while and get the opportunity to walk a mile in My Walking Shoes.</p>
         </div>
-        {posts}
+        {props.posts.map((post) => (
+          <DisplayPost key={post.ID} title={post.title} blurb={post.excerpt} slug={post.slug} />
+        ))}
       </div>
     </div>
   )
