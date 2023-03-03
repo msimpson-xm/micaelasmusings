@@ -18,3 +18,22 @@
   font-family: 'Times New Roman', Times, serif;
   font-size: xx-large;
 }
+
+.navbarItem {
+  display: inline-block;
+}
+
+.navbarItem * {
+  margin: 1rem;
+  background-color: white;
+  border: none;
+  text-align: center;
+  text-decoration: none;
+  cursor: pointer;
+  font-size: medium;
+  color: #cdc2bd;
+}
+
+.navBarItemHover:hover {
+  color: #c89b88;
+}

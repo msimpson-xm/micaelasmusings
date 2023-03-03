@@ -1,6 +1,6 @@
 import { count } from 'console';
 import React from 'react'
-import { getAnxiousToAdventurousPosts, getMemberingMariPosts, getMyWalkingShoesPosts } from '../pages/api';
+import { getPosts } from '../pages/api';
 import styles from './LatestFrom.module.css'
 
 interface latestFromProps {
@@ -106,11 +106,11 @@ const LatestFrom = ({ blog }:latestFromProps) => {
 const getLatestPosts = (blog:string) => {
   switch (blog) {
     case 'memberingMari': 
-      return getMemberingMariPosts(3);
+      return getPosts('%27membering%20Mari', 3);
     case 'anxiousToAdventurous':
-      return getAnxiousToAdventurousPosts(3);
+      return getPosts('Anxious%20to%20Adventurous', 3);
     case 'myWalkingShoes':
-      return getMyWalkingShoesPosts(3);
+      return getPosts('My%20Walking%20Shoes', 3);
     default:
       return null;
   }

@@ -2,12 +2,12 @@ import type { NextPage } from 'next'
 import Head from 'next/head'
 import Navbar from '../components/Navigation/Navbar'
 import styles from '../styles/About.module.css'
-import { getAnxiousToAdventurousPosts, getMemberingMariPosts, getMyWalkingShoesPosts } from './api/index';
+import { getPosts } from './api/index';
 
 const About: NextPage = () => {
-  getAnxiousToAdventurousPosts();
-  getMemberingMariPosts();
-  getMyWalkingShoesPosts();
+  getPosts('Anxious%20to%20Adventurous');
+  getPosts('%27membering%20Mari');
+  getPosts('My%20Walking%20Shoes');
   return (
     <div>
       <Head>

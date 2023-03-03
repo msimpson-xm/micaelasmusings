@@ -2,8 +2,21 @@ import React from 'react'
 import styles from './Navbar.module.css'
 import Image from 'next/image'
 import homePage from './homePage.jpg'
-import NavButton from './NavButton'
 import SocialsBar from './SocialsBar'
+
+import {
+  BrowserRouter as Router,
+  Routes,
+  Route,
+  Link
+} from "react-router-dom";
+import MemberingMari from '../../pages/MemberingMari'
+import AnxiousToAdventurous from '../../pages/AnxiousToAdventurous'
+import MyWalkingShoes from '../../pages/MyWalkingShoes'
+import Home from '../../pages/Home'
+import About from '../../pages/About'
+
+// TODO consider using next's builtin navigation
 
 const Navbar = () => {
   return (
@@ -13,14 +26,37 @@ const Navbar = () => {
         <Image src={homePage} alt='Micaelas Musings' />
         <div className={styles.overlayText}>MICAELAS MUSINGS</div>
       </div>
-      
-      <div className={styles.navigationItems}>
-        <NavButton label="Home" componentLocation="" />
-        <NavButton label="About" componentLocation="About" />
-        <NavButton label="membering Mari" componentLocation="MemberingMari" />
-        <NavButton label="Anxious to Adventurous" componentLocation="AnxiousToAdventurous" />
-        <NavButton label="My Walking Shoes" componentLocation="MyWalkingShoes" />
-      </div>
+
+      <Router>
+        <div>
+          <nav>
+            <ul>
+              <li className={styles.navbarItem}>
+                <Link to='/'>Home</Link>
+              </li>
+              <li className={styles.navbarItem}>
+                <Link to='/about'>About</Link>
+              </li>
+              <li className={styles.navbarItem}>
+                <Link to='/memberingmari'>Membering Mari</Link>
+              </li>
+              <li className={styles.navbarItem}>
+                <Link to='/anxioustoadventurous'>Anxious to Adventurious</Link>
+              </li>
+              <li className={styles.navbarItem}>
+                <Link to='/mywalkingshoes'>My Walking Shoes</Link>
+              </li>
+            </ul>
+          </nav>
+          <Routes>
+            <Route path='/' element={<Home />} />
+            <Route path='/about' element={<About />} />
+            <Route path='/memberingmari' element={<MemberingMari />} />
+            <Route path='/anxioustoadventurous' element={<AnxiousToAdventurous />} />
+            <Route path='/mywalkingshoes' element={<MyWalkingShoes />} />
+          </Routes>
+        </div>
+      </Router>
     </div>
   )
 }

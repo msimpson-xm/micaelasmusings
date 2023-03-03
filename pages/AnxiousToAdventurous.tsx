@@ -1,67 +1,20 @@
 import Head from 'next/head'
+import { connect, ConnectedProps } from 'react-redux';
+
 import Navbar from '../components/Navigation/Navbar'
 import DisplayPost from '../components/DisplayPost'
 import styles from '../styles/BlogPage.module.css'
+import { post } from './Interfaces';
 
-export async function getServerSideProps() {
-  const response = await fetch('https://public-api.wordpress.com/rest/v1.1/sites/micaelasmusingsca.wordpress.com/posts/?category=Anxious%20to%20Adventurous');
-  const data = await response.json();
-  return {
-    props: { 
-      posts: data.posts,
-    }
+interface rootState {
+  anxiousToAdventurous: {
+    posts: Array<post>
   }
 }
 
-interface post {
-  ID: number;
-  URL: string;
-  attachment_count: number;
-  attachments: object;
-  author: object;
-  capabilities: object;
-  categories: object;
-  content: string;
-  date: string;
-  discussion: object;
-  excerpt: string;
-  featured_image: string;
-  format: string;
-  geo: boolean;
-  global_ID: string;
-  guid: string;
-  i_like: boolean;
-  is_following: boolean;
-  is_reblogged: boolean;
-  like_count: number;
-  likes_enabled: boolean
-  menu_order: number;
-  meta: object;
-  metadata: Array<object>;
-  modified: string;
-  other_URLs: object;
-  page_template: string;
-  parent: boolean;
-  password: string;
-  post_thumbnail: object;
-  publicize_URLs: Array<string>;
-  sharing_enabled: boolean;
-  short_URL: string;
-  site_ID: number;
-  slug: string;
-  status: string;
-  sticky: boolean;
-  tags: object;
-  terms: object;
-  title: string;
-  type: string;
-}
+// TODO CREATE REDUX STORE AND IMPLEMENT ITS USE SO THIS PAGE CAN BE POPULATED
 
-type props = {
-  posts: Array<post>
-};
-
-const AnxiousToAdventurous = (props: props) => {
+const AnxiousToAdventurous = (props: PropsFromRedux) => {
   return (
     <div>
       <Head>
@@ -85,4 +38,13 @@ const AnxiousToAdventurous = (props: props) => {
   )
 }
 
-export default AnxiousToAdventurous;
+const mapStateToProps = (state: rootState) => {
+  return {
+    posts: state.anxiousToAdventurous.posts
+  };
+}
+
+const connector = connect(mapStateToProps);
+type PropsFromRedux = ConnectedProps<typeof connector>
+
+export default connector(AnxiousToAdventurous);

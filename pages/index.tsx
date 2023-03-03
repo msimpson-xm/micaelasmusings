@@ -1,10 +1,9 @@
 import type { NextPage } from 'next'
 import Head from 'next/head'
 import Navbar from '../components/Navigation/Navbar'
-import styles from '../styles/Home.module.css'
-import LatestFrom from '../components/LatestFrom'
+import Home from './Home'
 
-const Home: NextPage = () => {
+const App: NextPage = () => {
   return (
     <div>
       <Head>
@@ -13,16 +12,8 @@ const Home: NextPage = () => {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <Navbar />
-      <div className='container'>
-        HERE IS SOME CONTENT 
-        <div className={styles.homePage}>
-          <LatestFrom blog='memberingMari' />
-          <LatestFrom blog='anxiousToAdventurous' />
-          <LatestFrom blog='myWalkingShoes' />
-        </div>
-      </div>
     </div>
   )
 }
 
-export default Home
+export default App
