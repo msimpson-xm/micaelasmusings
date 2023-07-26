@@ -1,17 +1,19 @@
-import { createSlice } from "@reduxjs/toolkit";
+import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import { AppState } from "./store";
 import { HYDRATE } from "next-redux-wrapper";
+import { post } from '../pages/Interfaces';
+import { getPosts } from "../pages/api";
 
 // Type for our state
 export interface BlogsState {
   anxiousToAdventurous: {
-    posts: Array<Object>
+    posts: Array<post>
   },
   memberingMari: {
-    posts: Array<Object>
+    posts: Array<post>
   },
   myWalkingShoes: {
-    posts: Array<Object>
+    posts: Array<post>
   },
 }
 
@@ -86,6 +88,24 @@ export const blogsSlice = createSlice({
   }
 });
 
+export const getAnxiousToAdventurousPosts = createAsyncThunk('posts/getATAPosts', async () => {
+  const posts = await getPosts('Anxious%20to%20Adventurous');
+  return posts;
+})
+
+export const getMemberingMariPosts = createAsyncThunk('posts/getMMPosts', async () => {
+  const posts = await getPosts('%27membering%20Mari');
+  return posts;
+})
+
+export const getMyWalkingShoesPosts = createAsyncThunk('posts/getMWSPosts', async () => {
+  const posts = await getPosts('My%20Walking%20Shoes');
+  return posts;
+})
+
+
 export const { fetchAtaPosts, fetchMmPosts, fetchMwsPosts } = blogsSlice.actions;
 export const selectATABlogsState = (state: AppState) => state.blogs.anxiousToAdventurous.posts;
+export const selectMMBlogsState = (state: AppState) => state.blogs.memberingMari.posts;
+export const selectMWSBlogsState = (state: AppState) => state.blogs.myWalkingShoes.posts;
 export default blogsSlice.reducer;
